@@ -8,9 +8,8 @@ types, plus the Blender sources that reproduce them.
 
 - `Assets.xcassets/` — Xcode asset catalog. Each icon has its own imageset
   folder (e.g. `CityFurniture.imageset/`) with three PNGs for the 1x/2x/3x
-  scales. Note: the 2x/3x files are currently byte-identical copies of the
-  64×64 image, not real higher-resolution renders. `AppIcon.appiconset` holds
-  the macOS/iOS app icon.
+  scales: real 64/128/192 px renders. `AppIcon.appiconset` holds the
+  macOS/iOS app icon.
 - `blend/<Icon>.blend` — per-icon Blender source, one per icon (all fourteen).
   Self-contained: a collection named after the icon holding the geometry, the
   render `Camera`, the `Light`, the fitted world color, and the render
@@ -44,9 +43,10 @@ To check a render matches the committed icon:
 
 1. Render at 64×64.
 2. Compare against `Assets.xcassets/<Icon>.imageset/<file>.png`. The alpha
-   (silhouette) error should be ≤ 0.008; the per-icon interior color error is
-   listed in `blend/README.md` (exact icons ~0.001–0.015, approximate ones up
-   to ~0.07).
+   (silhouette) error should be ≤ 0.008; all fourteen icons currently pass,
+   with per-icon interior color errors listed in `blend/README.md` (range
+   ~0.0003–0.025 in sRGB MAE; Building and road are the two approximate
+   ones).
 3. If lighting needs re-fitting: render two basis images (world-only with the
    Light at 0 W, then Light-only with the world black), and least-squares fit
    the scale factors in linear sRGB space. The world color is the dominant
@@ -62,9 +62,11 @@ To check a render matches the committed icon:
 - Save the file and render in a fresh session to be sure the saved state is
   what gets rendered.
 - The `Lamp` in `icons.blend` contributes nothing to renders.
-- In the road icon, the dash material's render path is the legacy
-  `Diffuse BSDF` node, not the Principled BSDF; its color is 5.59 (brighter
-  than white) to match the original icon.
+- In the road icon, both materials render through the legacy `Diffuse BSDF`
+  branch, not the Principled BSDF (the `active output` flag in the file is
+  misleading); the dash color is 5.59 (brighter than white) to match the
+  original icon, and the surface color is 0.1523 under the re-fitted
+  world 0.173 / 81 W lighting.
 - Blender material colors are linear; PNG pixel values are sRGB — convert
   between the two.
 - `icons.blend` `Collection 1` contains leftover objects, some of which are
