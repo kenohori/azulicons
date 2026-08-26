@@ -8,7 +8,7 @@ is already in the asset catalog.
 ## Files
 
 - **`<Icon>.blend`** — one per icon, sixteen CityGML/CityJSON types in total:
-  `Building.blend`, `ReliefFeature.blend` (terrain), `Road.blend`,
+  `Building.blend`, `TINRelief.blend` (terrain), `Road.blend`,
   `LandUse.blend`, `TransportSquare.blend`, `Bridge.blend`, `Railway.blend`,
   `GenericCityObject.blend`, `SolitaryVegetationObject.blend`,
   `Tunnel.blend`, `PlantCover.blend`, `WaterBody.blend`, `CityFurniture.blend`,
@@ -44,7 +44,7 @@ look of the rest of the set.
 | Building            | 0.85       | 176       |
 | Road                | 0.173      | 81        |
 | LandUse             | 0.85       | 366       |
-| ReliefFeature       | 0.81       | 451       |
+| TINRelief           | 0.81       | 451       |
 | Bridge              | 0.84       | 362       |
 | Railway             | 0.82       | 421       |
 | TransportSquare     | 0.81       | 0         |
@@ -111,7 +111,16 @@ Notes:
 
 Three new icons were designed and added for CityJSON 1.1.3 object types that
 had no icon, and `Square` was renamed to `TransportSquare` (the CityJSON
-name); `Track` was removed (not a CityJSON type):
+name); `Track` was removed (not a CityJSON type); `ReliefFeature` was renamed
+to `TINRelief` (the CityJSON name).
+
+Note on type-name coverage vs CityJSON 1.1.3: the set matches fifteen of the
+sixteen independent object types exactly. `GenericCityObject` is not a
+CityJSON 1.1 type — 1.1 removed it in favour of `OtherConstruction` — but it
+is a CityJSON 1.0/2.0 and CityGML type, so its icon is kept (azul supports
+CityJSON 1.0 files too). The seventeen types without icons are all nested
+sub-objects (parts, installations, constructive elements, furniture, rooms,
+storeys, units, hollow spaces), which never appear as independent objects.
 
 - **CityObjectGroup** — three overlapping grey boxes (cluster of objects),
   material reused from `GenericCityObject.blend`.
