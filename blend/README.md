@@ -7,9 +7,11 @@ is already in the asset catalog.
 
 ## Files
 
-- **`<Icon>.blend`** — one per recoverable icon: `Building.blend`,
-  `ReliefFeature.blend` (terrain), `road.blend`, `landuse.blend`,
-  `Track.blend`, `bridge.blend`, `railway.blend`, `Square.blend`.
+- **`<Icon>.blend`** — one per icon, all fourteen CityGML/CityJSON types:
+  `Building.blend`, `ReliefFeature.blend` (terrain), `road.blend`,
+  `landuse.blend`, `Track.blend`, `bridge.blend`, `railway.blend`,
+  `Square.blend`, `GenericCityObject.blend`, `SolitaryVegetationObject.blend`,
+  `Tunnel.blend`, `PlantCover.blend`, `WaterBody.blend`, `CityFurniture.blend`.
 - **`../icons.blend`** — the combined working file containing all eight icon
   scenes as collections, plus camera and lights. The icon scenes overlap in
   world space, so an icon is rendered by isolating its collection.
@@ -65,11 +67,25 @@ the 64×64 PNG for the 1x/2x/3x slots. To produce real variants, set the
 render resolution to 128 or 192 px (keeping all other settings) and render
 again.
 
-## Missing sources
+## Recreated icons
 
-Six of the fourteen CityGML/CityJSON icons exist only as PNGs, without
-Blender sources: `CityFurniture` (bench), `GenericCityObject`,
-`PlantCover`, `SolitaryVegetationObject` (tree), `Tunnel` and `WaterBody`.
-`Collection 1` of `icons.blend` contains leftover objects that may be their
-remains — a green cone (possibly the tree crown), two untextured cubes, a
-vertical cylinder and two Surface objects — but this is unconfirmed.
+The last six icons were recreated from `icons.blend` leftovers where
+possible and otherwise modelled from the committed renders. They use the
+same camera and render settings as the other files.
+
+| Icon | World grey | Light (W) | Based on | Fidelity (interior MAE) |
+| ---- | ---------- | --------- | -------- | ----------------------- |
+| GenericCityObject | 0.51 | 880 | cube modelled from the icon | 0.014 (exact) |
+| SolitaryVegetationObject | 0.80 | 246 | the leftover green cone in `collection 1` as the crown | 0.020 (crown exact; trunk simplified) |
+| Tunnel | 0.76 | 0 | the leftover cylinder reworked as an open tube with a track inside | 0.068 (close; interior approximate) |
+| PlantCover | 0.67 | 985 | plate, same as the Square icon | 0.035 |
+| WaterBody | 0.82 | 618 | plate, same as the Square icon | 0.034 |
+| CityFurniture | 0.51 | 593 | bench modelled from the icon (seat, back, legs) | 0.047 (structure matches; proportions approximate) |
+
+Notes:
+
+- `icons.blend` also contains two large untextured cubes (`Cube.005`,
+  `Cube.006`) and two `Surface` objects in `Collection 1`; they do not match
+  any of the icons and were treated as unrelated leftovers.
+- The tunnel, plant, water and bench lighting still match only
+  approximately; the values above are the fitted best match.
