@@ -8,8 +8,8 @@ is already in the asset catalog.
 ## Files
 
 - **`<Icon>.blend`** — one per icon, sixteen CityGML/CityJSON types in total:
-  `Building.blend`, `ReliefFeature.blend` (terrain), `road.blend`,
-  `landuse.blend`, `TransportSquare.blend`, `bridge.blend`, `railway.blend`,
+  `Building.blend`, `ReliefFeature.blend` (terrain), `Road.blend`,
+  `LandUse.blend`, `TransportSquare.blend`, `Bridge.blend`, `Railway.blend`,
   `GenericCityObject.blend`, `SolitaryVegetationObject.blend`,
   `Tunnel.blend`, `PlantCover.blend`, `WaterBody.blend`, `CityFurniture.blend`,
   `CityObjectGroup.blend`, `OtherConstruction.blend`, `Waterway.blend`.
@@ -42,11 +42,11 @@ look of the rest of the set.
 | Icon                | World grey | Light (W) |
 | ------------------- | ---------- | --------- |
 | Building            | 0.85       | 176       |
-| road                | 0.173      | 81        |
-| landuse             | 0.85       | 366       |
+| Road                | 0.173      | 81        |
+| LandUse             | 0.85       | 366       |
 | ReliefFeature       | 0.81       | 451       |
-| bridge              | 0.84       | 362       |
-| railway             | 0.82       | 421       |
+| Bridge              | 0.84       | 362       |
+| Railway             | 0.82       | 421       |
 | TransportSquare     | 0.81       | 0         |
 | GenericCityObject   | 0.51       | 880       |
 | SolitaryVegetationObject | 0.80  | 246       |
