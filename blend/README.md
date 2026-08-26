@@ -50,9 +50,13 @@ Notes:
   effectively invisible), so it is omitted from the per-icon files.
 - `Track` and `Square` are lit purely by the world; their `Light` object is
   kept at 0 W for structural consistency and may be deleted.
-- The Building and road icons only match approximately (small residuals
-  concentrated in shading and the road's lane markings); the other six render
-  essentially pixel-perfect.
+- The road lane markings use a legacy diffuse shader (the `Diffuse BSDF`
+  branch of the material — that is the node path the render actually uses,
+  not the Principled BSDF); its colour is set to 5.59, brighter than white,
+  because the original dashes render about five times brighter than a white
+  diffuse under the fitted lighting.
+- The Building icon only matches approximately (a small residual concentrated
+  in the shading); the other seven icons render essentially pixel-perfect.
 
 ## Rendering other sizes
 
