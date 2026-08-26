@@ -1,8 +1,8 @@
 # Agent guide for the azulicons repository
 
 Assets for the [azul](https://github.com/tudelft3d/azul) 3D city model viewer:
-an Xcode asset catalog with icons for the fourteen CityGML/CityJSON object
-types, plus the Blender sources that reproduce them.
+an Xcode asset catalog with icons for sixteen CityGML/CityJSON object types,
+plus the Blender sources that reproduce them.
 
 ## Layout
 
@@ -10,7 +10,7 @@ types, plus the Blender sources that reproduce them.
   folder (e.g. `CityFurniture.imageset/`) with three PNGs for the 1x/2x/3x
   scales: real 64/128/192 px renders. `AppIcon.appiconset` holds the
   macOS/iOS app icon.
-- `blend/<Icon>.blend` — per-icon Blender source, one per icon (all fourteen).
+- `blend/<Icon>.blend` — per-icon Blender source, one per icon (all sixteen).
   Self-contained: a collection named after the icon holding the geometry, the
   render `Camera`, the `Light`, the fitted world color, and the render
   settings.
@@ -43,10 +43,12 @@ To check a render matches the committed icon:
 
 1. Render at 64×64.
 2. Compare against `Assets.xcassets/<Icon>.imageset/<file>.png`. The alpha
-   (silhouette) error should be ≤ 0.008; all fourteen icons currently pass,
-   with per-icon interior color errors listed in `blend/README.md` (range
-   ~0.0003–0.025 in sRGB MAE; Building and road are the two approximate
-   ones).
+   (silhouette) error should be ≤ 0.008; the thirteen original icons
+   currently pass, with per-icon interior color errors listed in
+   `blend/README.md` (range ~0.0003–0.025 in sRGB MAE; Building and road
+   are the two approximate ones). The three icons added in 2026-08
+   (CityObjectGroup, OtherConstruction, Waterway) have no reference icon to
+   compare against.
 3. If lighting needs re-fitting: render two basis images (world-only with the
    Light at 0 W, then Light-only with the world black), and least-squares fit
    the scale factors in linear sRGB space. The world color is the dominant

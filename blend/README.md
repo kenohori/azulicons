@@ -1,18 +1,21 @@
 # Azul icon Blender sources
 
-Per-icon Blender source files that reproduce the existing 64×64 icons in
+Per-icon Blender source files that reproduce the 64×64 icons in
 `../Assets.xcassets`. Each file is self-contained: opening it and pressing
 Render (F12) writes `<icon>.png` next to the `.blend`, matching the icon that
 is already in the asset catalog.
 
 ## Files
 
-- **`<Icon>.blend`** — one per icon, all fourteen CityGML/CityJSON types:
+- **`<Icon>.blend`** — one per icon, sixteen CityGML/CityJSON types in total:
   `Building.blend`, `ReliefFeature.blend` (terrain), `road.blend`,
-  `landuse.blend`, `Track.blend`, `bridge.blend`, `railway.blend`,
-  `Square.blend`, `GenericCityObject.blend`, `SolitaryVegetationObject.blend`,
-  `Tunnel.blend`, `PlantCover.blend`, `WaterBody.blend`, `CityFurniture.blend`.
-- **`../icons.blend`** — the combined working file containing all eight icon
+  `landuse.blend`, `TransportSquare.blend`, `bridge.blend`, `railway.blend`,
+  `GenericCityObject.blend`, `SolitaryVegetationObject.blend`,
+  `Tunnel.blend`, `PlantCover.blend`, `WaterBody.blend`, `CityFurniture.blend`,
+  `CityObjectGroup.blend`, `OtherConstruction.blend`, `Waterway.blend`.
+  (A `Track.blend` existed historically but was removed: Track is a CityGML
+  Trans-ADE class, not a CityJSON type.)
+- **`../icons.blend`** — the combined working file containing eight icon
   scenes as collections, plus camera and lights. The icon scenes overlap in
   world space, so an icon is rendered by isolating its collection.
 - **`../azul logo.blend`** — the original Azul logo source (Blender 2.77,
@@ -28,33 +31,39 @@ is already in the asset catalog.
 - Render settings: Cycles, 512 samples, 64×64, transparent film, Standard
   view transform, RGBA PNG.
 
-## Fitted lighting values
+## Per-icon lighting values
 
-The current lighting state of `icons.blend` (dark world, 1000 W Light) does
-not produce the existing icons. The values below were fitted numerically per
-icon (least squares in linear colour space) so that a render reproduces the
-committed PNG:
+For the thirteen original icons these were fitted numerically per icon (least
+squares in linear colour space) so that a render reproduces the committed
+PNG. For the three icons added in 2026-08 (CityObjectGroup, OtherConstruction,
+Waterway) there is no reference icon; their values were chosen to match the
+look of the rest of the set.
 
-| Icon           | World grey | Light (W) |
-| -------------- | ---------- | --------- |
-| Building       | 0.85       | 176       |
-| road           | 0.029      | 564       |
-| landuse        | 0.85       | 366       |
-| ReliefFeature  | 0.81       | 451       |
-| Track          | 0.81       | 0         |
-| bridge         | 0.84       | 362       |
-| railway        | 0.82       | 421       |
-| Square         | 0.81       | 0         |
-| road (refit)   | 0.173      | 81        |
-| PlantCover     | 0.67       | 985       |
-| WaterBody      | 0.82       | 618       |
+| Icon                | World grey | Light (W) |
+| ------------------- | ---------- | --------- |
+| Building            | 0.85       | 176       |
+| road                | 0.173      | 81        |
+| landuse             | 0.85       | 366       |
+| ReliefFeature       | 0.81       | 451       |
+| bridge              | 0.84       | 362       |
+| railway             | 0.82       | 421       |
+| TransportSquare     | 0.81       | 0         |
+| GenericCityObject   | 0.51       | 880       |
+| SolitaryVegetationObject | 0.80  | 246       |
+| Tunnel              | 0.26       | 464       |
+| PlantCover          | 0.67       | 985       |
+| WaterBody           | 0.82       | 618       |
+| CityFurniture       | 0.81       | 441       |
+| CityObjectGroup     | 0.51       | 880       |
+| OtherConstruction   | 0.65       | 520       |
+| Waterway            | 0.76       | 520       |
 
 Notes:
 
 - The 100 W `Lamp` in `icons.blend` contributes nothing to renders (it is
   effectively invisible), so it is omitted from the per-icon files.
-- `Track` and `Square` are lit purely by the world; their `Light` object is
-  kept at 0 W for structural consistency and may be deleted.
+- `TransportSquare` is lit purely by the world; its `Light` object is kept
+  at 0 W for structural consistency and may be deleted.
 - Both road materials render through the legacy `Diffuse BSDF` branch, not
   the Principled BSDF (the Principled sockets are inert in this file; the
   `active output` flag is misleading). The dash colour is 5.59, brighter
@@ -63,21 +72,15 @@ Notes:
   pair was re-fitted against the committed icon in 2026-08; the surface
   keeps a small shading-gradient residual (interior MAE 0.022 in sRGB).
 - The Building icon only matches approximately (a small residual concentrated
-  in the shading); all other icons render essentially pixel-perfect (every
-  icon is now at or below the 0.008 alpha error threshold, see the two tables
-  below).
-
-## Rendering other sizes
-
-The imagesets in the asset catalog store real 64/128/192 px renders in the
-1x/2x/3x slots. To regenerate a variant, set the render resolution to 128 or
-192 px (keeping all other settings) and render again.
+  in the shading); all other original icons render essentially pixel-perfect
+  (every icon is at or below the 0.008 alpha error threshold, see the table
+  below and the two tables above).
 
 ## Recreated icons
 
-The last six icons were recreated from `icons.blend` leftovers where
-possible and otherwise modelled from the committed renders. They use the
-same camera and render settings as the other files.
+Six icons were recreated from `icons.blend` leftovers where possible and
+otherwise modelled from the committed renders. They use the same camera and
+render settings as the other files.
 
 | Icon | World grey | Light (W) | Based on | Fidelity (interior MAE / alpha MAE) |
 | ---- | ---------- | --------- | -------- | ----------------------------------- |
@@ -101,12 +104,28 @@ Notes:
   tube is an open grey cylinder whose scale and pose were fitted to the
   icon's silhouette. The bench uses its original
   geometry and matches exactly.
-- The six recreated icons all started from fitted states; in 2026-08 the
-  crown/trunk (SolitaryVegetationObject), tube pose (Tunnel), cube
-  scale/pose (GenericCityObject) and plate pose/scale/materials
-  (PlantCover, WaterBody) were re-fitted, plus the road lighting. The
-  pre-fix versions of the six recreated assets remain in the gitignored
+- The pre-fix versions of the recreated assets remain in the gitignored
   `blend/*.blend1` backups.
-- `bench?.blend` is a July-2022-era working file (same object-naming scheme as
-  `icons.blend`) that turned out to contain the original CityFurniture bench
-  (objects `Cube.020`–`Cube.024` and `Cylinder.002`–`Cylinder.005`).
+
+## New icons (2026-08)
+
+Three new icons were designed and added for CityJSON 1.1.3 object types that
+had no icon, and `Square` was renamed to `TransportSquare` (the CityJSON
+name); `Track` was removed (not a CityJSON type):
+
+- **CityObjectGroup** — three overlapping grey boxes (cluster of objects),
+  material reused from `GenericCityObject.blend`.
+- **OtherConstruction** — a concrete corner of two walls with a third low
+  wall segment (miscellaneous urban construction).
+- **Waterway** — a blue canal strip with grey banks, using the WaterBody
+  water colour and a bank grey.
+
+Each was built in a fresh scene derived from the `WaterBody.blend` template
+(same camera, light, world and render settings) and follows the same
+per-file structure as the rest of the set.
+
+## Rendering other sizes
+
+The imagesets in the asset catalog store real 64/128/192 px renders in the
+1x/2x/3x slots. To regenerate a variant, set the render resolution to 128 or
+192 px (keeping all other settings) and render again.
