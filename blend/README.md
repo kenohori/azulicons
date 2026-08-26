@@ -77,7 +77,7 @@ same camera and render settings as the other files.
 | ---- | ---------- | --------- | -------- | ----------------------- |
 | GenericCityObject | 0.51 | 880 | cube modelled from the icon | 0.014 (exact) |
 | SolitaryVegetationObject | 0.80 | 246 | the leftover green cone in `collection 1` as the crown | 0.020 (crown exact; trunk simplified) |
-| Tunnel | 0.76 | 0 | the leftover cylinder reworked as an open tube with a track inside | 0.068 (close; interior approximate) |
+| Tunnel | 0.26 | 464 | open tube (fitted pose) with the railway objects (`Cube.011`-`Cube.019`) as the interior track | 0.038 (matches; the interior track is the railway icon's) |
 | PlantCover | 0.67 | 985 | plate, same as the Square icon | 0.035 |
 | WaterBody | 0.82 | 618 | plate, same as the Square icon | 0.034 |
 | CityFurniture | 0.81 | 441 | original bench geometry found in `bench?.blend` (2022 working file): three seat slats, two back slats, four legs | 0.008 (exact) |
@@ -87,8 +87,12 @@ Notes:
 - `icons.blend` also contains two large untextured cubes (`Cube.005`,
   `Cube.006`) and two `Surface` objects in `Collection 1`; they do not match
   any of the icons and were treated as unrelated leftovers.
-- The tunnel, plant and water lighting still match only approximately; the
-  values above are the fitted best match. The bench uses its original
+- The plant and water lighting still match only approximately; the values
+  above are the fitted best match.
+- The tunnel icon was rebuilt to match the original design: the interior
+  track is the railway icon's own geometry (`Cube.011`-`Cube.019`), and the
+  tube is an open grey cylinder whose pose was fitted to the icon's
+  silhouette. The bench uses its original
   geometry and matches exactly.
 - `bench?.blend` is a July-2022-era working file (same object-naming scheme as
   `icons.blend`) that turned out to contain the original CityFurniture bench
