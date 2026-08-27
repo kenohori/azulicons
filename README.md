@@ -25,9 +25,7 @@ palette (white walls, red roof, brown door, blue glass).
 | `Assets.xcassets/` | The asset catalog: one imageset per icon with real 64/128/192 px renders in the 1x/2x/3x slots, plus the macOS/iOS app icon. |
 | `blend/<Icon>.blend` | Self-contained Blender source per icon (geometry, camera, light, world, render settings). Twenty-four files, named after their imagesets. |
 | `blend/README.md` | The shared lighting rig, per-icon design notes, and historical fitting values. |
-| `icons.blend` | Combined working file: all icon scenes as collections in one shared space. |
 | `azul logo.blend` | The 2016 logo source; the Building icon geometry derives from it. |
-| `bench?.blend` | 2022 working file containing the original CityFurniture bench (the `?` is literal). |
 | `tools/make_preview.py` | Regenerates `preview.png` from the catalog (requires Pillow). |
 | `AGENTS.md` | Repository guide: verification workflow, conventions, and Blender gotchas. |
 

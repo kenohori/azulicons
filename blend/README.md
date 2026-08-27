@@ -39,11 +39,14 @@ PNGs are kept below for provenance only.
   `HollowSpace.blend`.
   (A `Track.blend` existed historically but was removed: Track is a CityGML
   Trans-ADE class, not a CityJSON type.)
-- **`../icons.blend`** — the combined working file containing eight icon
-  scenes as collections, plus camera and lights. The icon scenes overlap in
-  world space, so an icon is rendered by isolating its collection.
 - **`../azul logo.blend`** — the original Azul logo source (Blender 2.77,
   2016). The Building icon geometry is the same house it contains.
+
+The combined working file `icons.blend` (the original eight icon scenes,
+including the retired Track, plus unrelated leftover objects) and
+`bench?.blend` (the 2022 working file the bench was recovered from) were
+removed from the repository in 2026-08 as superseded by the per-icon files;
+both remain retrievable from git history.
 
 ## Structure of each file
 

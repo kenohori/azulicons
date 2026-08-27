@@ -17,13 +17,8 @@ reproduce them.
   and the render settings.
 - `blend/README.md` — the shared rig, per-icon design notes, and historical
   fitting values. Read this before changing any blend file.
-- `icons.blend` — combined working file: all icon scenes as collections in one
-  shared (overlapping) world space; an icon is rendered by isolating its
-  collection.
 - `azul logo.blend` — the 2016 logo source (Blender 2.77); the Building icon
   geometry derives from it.
-- `bench?.blend` — 2022-era working file containing the original CityFurniture
-  bench (and other mid-edit objects). The `?` in the name is literal.
 - `preview.png` — contact sheet of all 24 icons on light and dark
   backgrounds, generated from the catalog; committed.
 - `tools/make_preview.py` — regenerates `preview.png` (`python3
@@ -69,7 +64,12 @@ factors in linear sRGB space.
   objects; prefer setting `o.scale` directly when in doubt.
 - Save the file and render in a fresh session to be sure the saved state is
   what gets rendered.
-- The `Lamp` in `icons.blend` contributes nothing to renders.
+- The retired combined working file `icons.blend` (removed 2026-08, still in
+  git history) is the source of two hard lessons: its 100 W `Lamp`
+  contributes nothing to renders, and its `Collection 1` holds leftover
+  objects, some from old icons (the Cone is the tree crown; `Cylinder.001`
+  is the tunnel tube). Do not treat unchecked objects as junk — an original
+  working file was nearly lost that way.
 - In the road icon, both materials render through the legacy `Diffuse BSDF`
   branch, not the Principled BSDF (the `active output` flag in the file is
   misleading). Since the shared-rig migration (2026-08) the dashes are plain
@@ -82,10 +82,6 @@ factors in linear sRGB space.
   frame.
 - Blender material colors are linear; PNG pixel values are sRGB — convert
   between the two.
-- `icons.blend` `Collection 1` contains leftover objects, some of which are
-  parts of old icons (the Cone is the tree crown; `Cylinder.001` is the
-  tunnel tube). Do not delete objects that look unassigned without checking
-  with the maintainer — an original working file was nearly lost this way.
 
 ## Conventions
 
