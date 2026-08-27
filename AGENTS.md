@@ -39,20 +39,25 @@ Renders are written to `//<Icon>.png`, next to the `.blend`. Settings: Cycles,
 
 ## Verification
 
-To check a render matches the committed icon:
+The set has two tiers:
 
-1. Render at 64×64.
-2. Compare against `Assets.xcassets/<Icon>.imageset/<file>.png`. The alpha
-   (silhouette) error should be ≤ 0.008; the thirteen original icons
-   currently pass, with per-icon interior color errors listed in
-   `blend/README.md` (range ~0.0003–0.025 in sRGB MAE; Building and road
-   are the two approximate ones). The three icons added in 2026-08
-   (CityObjectGroup, OtherConstruction, Waterway) have no reference icon to
-   compare against.
-3. If lighting needs re-fitting: render two basis images (world-only with the
-   Light at 0 W, then Light-only with the world black), and least-squares fit
-   the scale factors in linear sRGB space. The world color is the dominant
-   light for most icons.
+- **Shared-rig icons** (2026-08: Building, Railway, Road,
+  SolitaryVegetationObject, CityFurniture, Bridge, TransportSquare, TINRelief,
+  CityObjectGroup, OtherConstruction) are defined by the rig, not by a
+  reference render: world 0.82 grey, 300 W point `Light` (radius 0.1), 512
+  samples, and normalized framing — the rendered alpha bbox spans 84 % of the
+  canvas (±1 px) and is centred. To verify a re-render, check the rig values
+  in the file and re-measure the bbox.
+- **Legacy icons** (GenericCityObject, LandUse, PlantCover, Tunnel,
+  WaterBody, Waterway) still reproduce their committed PNGs: render at
+  64×64 and compare; the alpha error should be ≤ 0.008, with per-icon
+  interior colour errors listed in `blend/README.md`. They are due to
+  migrate to the shared rig (their framing currently sits at 33–77 %
+  content coverage vs the rig's 84 %).
+
+If lighting ever needs re-fitting (legacy tier only): render two basis
+images (world-only with the Light at 0 W, then Light-only with the world
+black), and least-squares fit the scale factors in linear sRGB space.
 
 ## Gotchas (learned the hard way)
 
@@ -66,9 +71,14 @@ To check a render matches the committed icon:
 - The `Lamp` in `icons.blend` contributes nothing to renders.
 - In the road icon, both materials render through the legacy `Diffuse BSDF`
   branch, not the Principled BSDF (the `active output` flag in the file is
-  misleading); the dash color is 5.59 (brighter than white) to match the
-  original icon, and the surface color is 0.1523 under the re-fitted
-  world 0.173 / 81 W lighting.
+  misleading). Since the shared-rig migration (2026-08) the dashes are plain
+  white (1.0); the old 5.59 dash colour was a compensation for the road's
+  former dim per-icon rig and is gone.
+- Blender image pixels are stored bottom-up (row 0 is the bottom of the
+  image). When measuring alpha bboxes in scripts, a vertical correction
+  computed from them must not be flipped — a wrong sign turns the
+  normalisation loop into positive feedback and the object drifts out of
+  frame.
 - Blender material colors are linear; PNG pixel values are sRGB — convert
   between the two.
 - `icons.blend` `Collection 1` contains leftover objects, some of which are
