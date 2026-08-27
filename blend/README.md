@@ -176,12 +176,18 @@ glass):
   at the front-right (an extension as "part of the building").
 - **BuildingInstallation** — a low flat-roofed base carrying a large
   two-module solar array on mounting legs (the canonical building
-  installation). Deliberately houseless: the first version was a house with
-  a chimney and AC unit, but at icon sizes it was confusable with Building.
-- **BuildingUnit** — an apartment block: tall white slab with a blue window
-  grid and two doors on the camera-facing face, flat white roof. The first
-  version reused the logo house as a dollhouse cutaway, but the red gable
-  silhouette made it read as Building at icon sizes.
+  installation); each module is a thin dark-blue cell slab on a slightly
+  larger metal backing plate, so the panels read as tilted slabs, not
+  cubes, with the legs meeting the tilted underside. Deliberately
+  houseless: the first version was a house with a chimney and AC unit,
+  but at icon sizes it was confusable with Building.
+- **BuildingUnit** — a single apartment: compact white box with a flat
+  white roof, one brown door, one blue window and a small balcony with a
+  metal railing, all on the camera-facing face — the balcony is what
+  marks it as one flat rather than a house or a block. The first version
+  reused the logo house as a dollhouse cutaway (read as Building); the
+  second was an apartment block with a window grid and two doors (read
+  as many units).
 - **Storey** — a single-storey slice: floor slab, four walls with door and
   window, open top.
 - **Room** — a room corner: timber floor, two white walls, a blue window.
