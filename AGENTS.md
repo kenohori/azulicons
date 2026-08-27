@@ -29,6 +29,8 @@ reproduce them.
 - `tools/make_preview.py` — regenerates `preview.png` (`python3
   tools/make_preview.py`, requires Pillow).
 - `README.md` — human-facing overview; keep it in sync with this guide.
+- `LICENSE` — GPLv3, identical to azul's; the icons are part of the azul
+  project.
 
 ## Rendering an icon
 

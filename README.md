@@ -58,3 +58,9 @@ azul looks icons up by the exact object type string
 (`UIImage(named: typeName)`), so imageset folder names are the type names
 verbatim. To update azul, copy the imageset folders into azul's
 `src/Assets.xcassets/`; Xcode picks up new imagesets without project changes.
+
+## Licence
+
+azulicons is part of the azul project and is available under the
+[GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html) licence, like azul
+itself.
