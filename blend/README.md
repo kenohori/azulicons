@@ -125,9 +125,11 @@ Notes:
 
 ## Redesigned icons (2026-08, shared rig)
 
-Four weak icons were redesigned under the shared rig (world 0.82 / 300 W,
+Seven icons were redesigned under the shared rig (world 0.82 / 300 W,
 84 % normalized framing) so each has a distinct, readable silhouette at UI
-sizes:
+sizes. The first pass replaced the interchangeable grey shapes; the second
+pass gave the flat surface plates internal detail and outline variation, so
+no two icons share a silhouette any more.
 
 - **TransportSquare** — raised concrete plaza (light top, dark sides) with a
   central blue fountain and four corner bollards, replacing the featureless
@@ -141,6 +143,14 @@ sizes:
 - **OtherConstruction** — a concrete silo (cylinder, dome, dark annex)
   replacing the abstract wall corner that was hard to name even at full
   size.
+- **PlantCover** — a green base with rounded bush mounds in three greens,
+  replacing the flat plate that was silhouette-identical to WaterBody (and
+  distinct from the single-tree cone of SolitaryVegetationObject).
+- **WaterBody** — an irregular lake outline with a grey island and islet,
+  replacing the flat blue square.
+- **LandUse** — the four zoning quadrants kept but at stepped heights with
+  thin grooves between them (a zoning-model look), replacing the perfectly
+  flat four-colour checker.
 
 ## New icons (2026-08)
 
