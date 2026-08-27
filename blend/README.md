@@ -4,7 +4,7 @@ Per-icon Blender source files for the icons in `../Assets.xcassets`. Each
 file is self-contained: opening it and pressing Render (F12) writes
 `<icon>.png` next to the `.blend`.
 
-All sixteen icons use the shared lighting rig (2026-08): one world/point
+All icons use the shared lighting rig (2026-08): one world/point
 light pair and normalized framing, so the set is uniformly lit and framed.
 The historical per-icon fitted values that reproduced the pre-rig committed
 PNGs are kept below for provenance only.
@@ -26,12 +26,17 @@ PNGs are kept below for provenance only.
 
 ## Files
 
-- **`<Icon>.blend`** — one per icon, sixteen CityGML/CityJSON types in total:
+- **`<Icon>.blend`** — one per icon, twenty-four in total: the sixteen
+  independent CityGML/CityJSON object types
   `Building.blend`, `TINRelief.blend` (terrain), `Road.blend`,
   `LandUse.blend`, `TransportSquare.blend`, `Bridge.blend`, `Railway.blend`,
   `GenericCityObject.blend`, `SolitaryVegetationObject.blend`,
   `Tunnel.blend`, `PlantCover.blend`, `WaterBody.blend`, `CityFurniture.blend`,
-  `CityObjectGroup.blend`, `OtherConstruction.blend`, `Waterway.blend`.
+  `CityObjectGroup.blend`, `OtherConstruction.blend`, `Waterway.blend`,
+  plus the eight building sub-types `BuildingPart.blend`,
+  `BuildingInstallation.blend`, `BuildingUnit.blend`, `Storey.blend`,
+  `Room.blend`, `BuildingFurniture.blend`, `ConstructiveElement.blend` and
+  `HollowSpace.blend`.
   (A `Track.blend` existed historically but was removed: Track is a CityGML
   Trans-ADE class, not a CityJSON type.)
 - **`../icons.blend`** — the combined working file containing eight icon
@@ -159,6 +164,36 @@ brown (the bench timber brown), window glass kept blue. The
 CityObjectGroup mini-house roof follows the Building colour so the echo
 stays consistent.
 
+## Building sub-type icons (2026-08)
+
+Eight icons for the building sub-types, all on the shared rig. azul looks
+icons up by the exact type string (`UIImage(named: typeName)`), so the
+imageset folder names are the type names verbatim. All eight echo the
+Building icon's palette (white walls, red roof, brown door/timber, blue
+glass):
+
+- **BuildingPart** — the logo house with a small flat-roofed annex attached
+  at the front-right (an extension as "part of the building").
+- **BuildingInstallation** — the logo house with a chimney poking above the
+  ridge and an AC unit on the front wall.
+- **BuildingUnit** — a dollhouse cutaway: gable house with an open front
+  revealing the brown floor and the white party wall dividing two units.
+  The roof is set back so the interior stays visible from the render
+  camera.
+- **Storey** — a single-storey slice: floor slab, four walls with door and
+  window, open top.
+- **Room** — a room corner: timber floor, two white walls, a blue window.
+- **BuildingFurniture** — a timber wardrobe with white door panels and
+  knobs (distinct from the CityFurniture bench).
+- **ConstructiveElement** — a concrete portal frame (two columns, beam) on
+  a dark base slab.
+- **HollowSpace** — a house-shaped block with an arched passage cut
+  through, lined dark so the hollow reads.
+
+Of the seventeen nested sub-object types that had no icons, these eight
+building-related ones are now covered; the rest belong to bridges, tunnels
+and water bodies.
+
 ## New icons (2026-08)
 
 Three new icons were designed and added for CityJSON 1.1.3 object types that
@@ -170,9 +205,11 @@ Note on type-name coverage vs CityJSON 1.1.3: the set matches fifteen of the
 sixteen independent object types exactly. `GenericCityObject` is not a
 CityJSON 1.1 type — 1.1 removed it in favour of `OtherConstruction` — but it
 is a CityJSON 1.0/2.0 and CityGML type, so its icon is kept (azul supports
-CityJSON 1.0 files too). The seventeen types without icons are all nested
-sub-objects (parts, installations, constructive elements, furniture, rooms,
-storeys, units, hollow spaces), which never appear as independent objects.
+CityJSON 1.0 files too). The seventeen types without icons at that point
+were all nested sub-objects (parts, installations, constructive elements,
+furniture, rooms, storeys, units, hollow spaces), which never appear as
+independent objects; the eight building-related ones have since received
+icons (see *Building sub-type icons* above).
 
 - **CityObjectGroup** — first version was three overlapping grey boxes; see
   *Redesigned icons* above for the current design.

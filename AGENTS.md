@@ -1,8 +1,9 @@
 # Agent guide for the azulicons repository
 
 Assets for the [azul](https://github.com/tudelft3d/azul) 3D city model viewer:
-an Xcode asset catalog with icons for sixteen CityGML/CityJSON object types,
-plus the Blender sources that reproduce them.
+an Xcode asset catalog with icons for the sixteen independent CityGML/CityJSON
+object types plus eight building sub-types, and the Blender sources that
+reproduce them.
 
 ## Layout
 
@@ -10,10 +11,10 @@ plus the Blender sources that reproduce them.
   folder (e.g. `CityFurniture.imageset/`) with three PNGs for the 1x/2x/3x
   scales: real 64/128/192 px renders. `AppIcon.appiconset` holds the
   macOS/iOS app icon.
-- `blend/<Icon>.blend` — per-icon Blender source, one per icon (all sixteen).
-  Self-contained: a collection named after the icon holding the geometry, the
-  render `Camera`, the `Light`, the shared-rig world colour, and the render
-  settings.
+- `blend/<Icon>.blend` — per-icon Blender source, one per icon (all
+  twenty-four). Self-contained: a collection named after the icon holding the
+  geometry, the render `Camera`, the `Light`, the shared-rig world colour,
+  and the render settings.
 - `blend/README.md` — the shared rig, per-icon design notes, and historical
   fitting values. Read this before changing any blend file.
 - `icons.blend` — combined working file: all icon scenes as collections in one
@@ -39,7 +40,7 @@ Renders are written to `//<Icon>.png`, next to the `.blend`. Settings: Cycles,
 
 ## Verification
 
-All sixteen icons are defined by the shared rig, not by a reference render:
+All icons are defined by the shared rig, not by a reference render:
 world 0.82 grey, 300 W point `Light` (radius 0.1) at (4.076, 1.005, 5.904),
 512 samples, and normalized framing — the rendered alpha bbox spans 84 % of
 the canvas (±1 px) and is centred. To verify a re-render, render at 64×64
