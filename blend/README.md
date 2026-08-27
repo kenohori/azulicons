@@ -137,9 +137,10 @@ no two icons share a silhouette any more.
 - **TINRelief** — irregular faceted terrain patch (jittered 6×6 grid
   triangulation, flat-shaded, two hills) in an olive-green, replacing the
   smooth dome that read as generic foliage.
-- **CityObjectGroup** — three distinct city objects (white house with blue
-  roof, tree, grey block) in a loose cluster, replacing three
-  interpenetrating grey boxes that read as a modelling error.
+- **CityObjectGroup** — three distinct city objects (white house with red
+  roof — echoing the Building icon, tree, grey block) in a loose cluster,
+  replacing three interpenetrating grey boxes that read as a modelling
+  error.
 - **OtherConstruction** — a concrete silo (cylinder, dome, dark annex)
   replacing the abstract wall corner that was hard to name even at full
   size.
@@ -151,6 +152,12 @@ no two icons share a silhouette any more.
 - **LandUse** — the four zoning quadrants kept but at stepped heights with
   thin grooves between them (a zoning-model look), replacing the perfectly
   flat four-colour checker.
+
+The Building icon kept its 2016 logo geometry but was recoloured to cut the
+number of blue icons in the set: roof red (the LandUse zone red), door
+brown (the bench timber brown), window glass kept blue. The
+CityObjectGroup mini-house roof follows the Building colour so the echo
+stays consistent.
 
 ## New icons (2026-08)
 
