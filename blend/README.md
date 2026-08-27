@@ -174,12 +174,14 @@ glass):
 
 - **BuildingPart** — the logo house with a small flat-roofed annex attached
   at the front-right (an extension as "part of the building").
-- **BuildingInstallation** — the logo house with a chimney poking above the
-  ridge and an AC unit on the front wall.
-- **BuildingUnit** — a dollhouse cutaway: gable house with an open front
-  revealing the brown floor and the white party wall dividing two units.
-  The roof is set back so the interior stays visible from the render
-  camera.
+- **BuildingInstallation** — a low flat-roofed base carrying a large
+  two-module solar array on mounting legs (the canonical building
+  installation). Deliberately houseless: the first version was a house with
+  a chimney and AC unit, but at icon sizes it was confusable with Building.
+- **BuildingUnit** — an apartment block: tall white slab with a blue window
+  grid and two doors on the camera-facing face, flat white roof. The first
+  version reused the logo house as a dollhouse cutaway, but the red gable
+  silhouette made it read as Building at icon sizes.
 - **Storey** — a single-storey slice: floor slab, four walls with door and
   window, open top.
 - **Room** — a room corner: timber floor, two white walls, a blue window.
