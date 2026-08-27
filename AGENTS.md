@@ -24,6 +24,11 @@ reproduce them.
   geometry derives from it.
 - `bench?.blend` — 2022-era working file containing the original CityFurniture
   bench (and other mid-edit objects). The `?` in the name is literal.
+- `preview.png` — contact sheet of all 24 icons on light and dark
+  backgrounds, generated from the catalog; committed.
+- `tools/make_preview.py` — regenerates `preview.png` (`python3
+  tools/make_preview.py`, requires Pillow).
+- `README.md` — human-facing overview; keep it in sync with this guide.
 
 ## Rendering an icon
 
@@ -87,3 +92,5 @@ factors in linear sRGB space.
   render settings in the file).
 - One commit per logical change; no remote is configured, commits land on
   `main`.
+- After changing icons, regenerate `preview.png` (`python3
+  tools/make_preview.py`) in the same change so the sheet stays current.
