@@ -12,10 +12,10 @@ plus the Blender sources that reproduce them.
   macOS/iOS app icon.
 - `blend/<Icon>.blend` — per-icon Blender source, one per icon (all sixteen).
   Self-contained: a collection named after the icon holding the geometry, the
-  render `Camera`, the `Light`, the fitted world color, and the render
+  render `Camera`, the `Light`, the shared-rig world colour, and the render
   settings.
-- `blend/README.md` — per-icon fitted lighting values and fidelity numbers.
-  Read this before changing any blend file.
+- `blend/README.md` — the shared rig, per-icon design notes, and historical
+  fitting values. Read this before changing any blend file.
 - `icons.blend` — combined working file: all icon scenes as collections in one
   shared (overlapping) world space; an icon is rendered by isolating its
   collection.
@@ -39,25 +39,18 @@ Renders are written to `//<Icon>.png`, next to the `.blend`. Settings: Cycles,
 
 ## Verification
 
-The set has two tiers:
+All sixteen icons are defined by the shared rig, not by a reference render:
+world 0.82 grey, 300 W point `Light` (radius 0.1) at (4.076, 1.005, 5.904),
+512 samples, and normalized framing — the rendered alpha bbox spans 84 % of
+the canvas (±1 px) and is centred. To verify a re-render, render at 64×64
+in a fresh session and check the bbox; the world/light values in the file
+must match the rig. Pre-rig per-icon fitted values are kept in
+`blend/README.md` for provenance only.
 
-- **Shared-rig icons** (2026-08: Building, Railway, Road,
-  SolitaryVegetationObject, CityFurniture, Bridge, TransportSquare, TINRelief,
-  CityObjectGroup, OtherConstruction) are defined by the rig, not by a
-  reference render: world 0.82 grey, 300 W point `Light` (radius 0.1), 512
-  samples, and normalized framing — the rendered alpha bbox spans 84 % of the
-  canvas (±1 px) and is centred. To verify a re-render, check the rig values
-  in the file and re-measure the bbox.
-- **Legacy icons** (GenericCityObject, LandUse, PlantCover, Tunnel,
-  WaterBody, Waterway) still reproduce their committed PNGs: render at
-  64×64 and compare; the alpha error should be ≤ 0.008, with per-icon
-  interior colour errors listed in `blend/README.md`. They are due to
-  migrate to the shared rig (their framing currently sits at 33–77 %
-  content coverage vs the rig's 84 %).
-
-If lighting ever needs re-fitting (legacy tier only): render two basis
-images (world-only with the Light at 0 W, then Light-only with the world
-black), and least-squares fit the scale factors in linear sRGB space.
+If a future icon ever needs fitting against an existing reference image
+(the old workflow): render two basis images (world-only with the Light at
+0 W, then Light-only with the world black), and least-squares fit the scale
+factors in linear sRGB space.
 
 ## Gotchas (learned the hard way)
 

@@ -4,12 +4,10 @@ Per-icon Blender source files for the icons in `../Assets.xcassets`. Each
 file is self-contained: opening it and pressing Render (F12) writes
 `<icon>.png` next to the `.blend`.
 
-The set is migrating to a shared lighting rig (2026-08). Ten icons
-(Building, Railway, Road, SolitaryVegetationObject, CityFurniture, Bridge,
-TransportSquare, TINRelief, CityObjectGroup, OtherConstruction) are defined
-by the rig below; the other six (GenericCityObject, LandUse, PlantCover,
-Tunnel, WaterBody, Waterway) still carry their historical per-icon fitted
-values and reproduce their committed PNGs exactly.
+All sixteen icons use the shared lighting rig (2026-08): one world/point
+light pair and normalized framing, so the set is uniformly lit and framed.
+The historical per-icon fitted values that reproduced the pre-rig committed
+PNGs are kept below for provenance only.
 
 ## Shared rig (2026-08)
 
@@ -47,26 +45,34 @@ values and reproduce their committed PNGs exactly.
 - One collection (named after the icon) containing the icon geometry.
 - `Camera` — render camera (35 mm, standard icon pose; identical in all
   sixteen files).
-- `Light` — point light at (4.076, 1.005, 5.904); 300 W on the shared rig,
-  otherwise the per-icon energy from the table below.
-- World background grey: 0.82 on the shared rig, otherwise from the table
-  below. For most icons the world is the dominant light.
+- `Light` — point light at (4.076, 1.005, 5.904), 300 W (shared rig).
+- World background grey 0.82 (shared rig) — the dominant light.
 - Render settings: Cycles, 512 samples, 64×64, transparent film, Standard
   view transform, RGBA PNG.
 
-## Per-icon lighting values (legacy tier)
+## Historical per-icon fitted lighting (pre-rig, provenance only)
 
-These apply to the six icons **not** on the shared rig. They were fitted
-numerically per icon (least squares in linear colour space) so that a render
-reproduces the committed PNG.
+Until 2026-08 each icon carried its own world/light pair, fitted numerically
+(least squares in linear colour space) so a render reproduced the committed
+PNG. All files now use the shared rig; these values are kept for reference.
 
 | Icon                | World grey | Light (W) |
 | ------------------- | ---------- | --------- |
-| GenericCityObject   | 0.51       | 880       |
+| Building            | 0.85       | 176       |
+| Road                | 0.173      | 81        |
 | LandUse             | 0.85       | 366       |
-| PlantCover          | 0.67       | 985       |
+| TINRelief           | 0.81       | 451       |
+| Bridge              | 0.84       | 362       |
+| Railway             | 0.82       | 421       |
+| TransportSquare     | 0.81       | 0         |
+| GenericCityObject   | 0.51       | 880       |
+| SolitaryVegetationObject | 0.80  | 246       |
 | Tunnel              | 0.26       | 464       |
+| PlantCover          | 0.67       | 985       |
 | WaterBody           | 0.82       | 618       |
+| CityFurniture       | 0.81       | 441       |
+| CityObjectGroup     | 0.51       | 880       |
+| OtherConstruction   | 0.65       | 520       |
 | Waterway            | 0.76       | 520       |
 
 Notes:
@@ -88,19 +94,18 @@ Notes:
 ## Recreated icons
 
 Six icons were recreated from `icons.blend` leftovers where possible and
-otherwise modelled from the committed renders. They use the same camera and
-render settings as the other files. SolitaryVegetationObject and
-CityFurniture have since moved to the shared rig; their rows below record
-the historical fit.
+otherwise modelled from the committed renders, before the shared rig
+existed. The world/light and fidelity columns below are historical; all six
+are on the shared rig now.
 
-| Icon | World grey | Light (W) | Based on | Fidelity (interior MAE / alpha MAE) |
-| ---- | ---------- | --------- | -------- | ----------------------------------- |
-| GenericCityObject | 0.51 | 880 | cube from the icon, fitted in scale and pose | 0.014 / 0.002 (exact) |
-| SolitaryVegetationObject | (rig) | (rig) | the original leftover `Cone` mesh from `icons.blend` `Collection 1` as the crown, trunk fitted underneath | — |
-| Tunnel | 0.26 | 464 | open tube (fitted scale and pose) with the railway objects (`Cube.011`-`Cube.019`) as the interior track | 0.033 / 0.004 (silhouette matches; the interior track is the railway icon's) |
-| PlantCover | 0.67 | 985 | plate (scaled to 0.974, pose fitted, material hue corrected) | 0.010 / 0.004 (exact) |
-| WaterBody | 0.82 | 618 | plate (scaled to 0.974, pose fitted, material hue corrected) | 0.015 / 0.004 (exact) |
-| CityFurniture | (rig) | (rig) | original bench geometry found in `bench?.blend` (2022 working file): three seat slats, two back slats, four legs | — |
+| Icon | World grey | Light (W) | Based on |
+| ---- | ---------- | --------- | -------- |
+| GenericCityObject | 0.51 | 880 | cube from the icon, fitted in scale and pose |
+| SolitaryVegetationObject | 0.80 | 246 | the original leftover `Cone` mesh from `icons.blend` `Collection 1` as the crown, trunk fitted underneath |
+| Tunnel | 0.26 | 464 | open tube (fitted scale and pose) with the railway objects (`Cube.011`-`Cube.019`) as the interior track |
+| PlantCover | 0.67 | 985 | plate (scaled to 0.974, pose fitted, material hue corrected) |
+| WaterBody | 0.82 | 618 | plate (scaled to 0.974, pose fitted, material hue corrected) |
+| CityFurniture | 0.81 | 441 | original bench geometry found in `bench?.blend` (2022 working file): three seat slats, two back slats, four legs |
 
 Notes:
 
@@ -157,8 +162,8 @@ storeys, units, hollow spaces), which never appear as independent objects.
 - **OtherConstruction** — first version was a concrete corner of two walls;
   see *Redesigned icons* above for the current design.
 - **Waterway** — a blue canal strip with grey banks, using the WaterBody
-  water colour and a bank grey. Still on its original per-icon lighting;
-  due to migrate to the shared rig.
+  water colour and a bank grey. Migrated to the shared rig in 2026-08,
+  which also pulled the strip fully into frame.
 
 Each was built in a fresh scene derived from the `WaterBody.blend` template
 (same camera, light, world and render settings) and follows the same
